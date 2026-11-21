@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portafolio de Yojhan Huanca Yucra
 
-## Getting Started
+Portafolio profesional en Next.js con proyectos de desarrollo web, aplicaciones empresariales y video con inteligencia artificial.
 
-First, run the development server:
+## Ejecutar en local
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000). Para compilar la versión de producción, ejecuta `npm run build`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Rutas del portafolio
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `/` presenta el perfil, el carrusel de proyectos y el acceso a contacto.
+- `/projects` permite buscar proyectos por nombre o tecnología y filtrar por categoría.
+- `/projects/[slug]` muestra la ficha y la imagen de cada proyecto.
+- `/about` resume la formación, la experiencia y las tecnologías.
+- `/contacto` muestra el correo y el perfil de GitHub.
+- `/sitemap.xml` y `/robots.txt` se generan a partir de las rutas y del dominio de producción.
 
-## Learn More
+## Vercel y dominio
 
-To learn more about Next.js, take a look at the following resources:
+Vercel detecta el proyecto como Next.js. La URL de producción de Vercel se usa de forma automática mientras no se configure un dominio propio. Tras asociar y verificar el dominio, configura `SITE_URL` en el entorno de producción con su origen completo, por ejemplo `https://ejemplo.com`, y vuelve a desplegar. Los enlaces canónicos, el sitemap y la referencia del sitemap en `robots.txt` usarán ese dominio.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Las capturas y fotos de los proyectos proceden de sus repositorios. Cada ficha distingue una captura de la interfaz de una foto o banner del repositorio.
