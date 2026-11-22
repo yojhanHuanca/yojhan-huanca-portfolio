@@ -1,4 +1,4 @@
-type IconName = 'up-right' | 'right' | 'left' | 'down' | 'code' | 'mail' | 'github' | 'play' | 'pause' | 'film' | 'wave' | 'crop';
+type IconName = 'up-right' | 'right' | 'left' | 'down' | 'code' | 'mail' | 'github' | 'play' | 'pause' | 'film' | 'wave' | 'crop' | 'search' | 'close';
 
 const paths: Record<IconName, React.ReactNode> = {
   'up-right': <><path d="M5 19 19 5M7 5h12v12" /></>,
@@ -12,6 +12,8 @@ const paths: Record<IconName, React.ReactNode> = {
   pause: <path d="M9 5v14m6-14v14" />,
   film: <><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M7 4v16m10-16v16M3 9h4m-4 6h4m10-6h4m-4 6h4" /></>,
   wave: <path d="M3 10v4m4-8v12m5-15v18m5-15v12m4-8v4" />,
+  search: <><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 4 4" /></>,
+  close: <path d="m6 6 12 12M18 6 6 18" />,
   crop: <path d="M8 4H6a2 2 0 0 0-2 2v2m12-4h2a2 2 0 0 1 2 2v2M4 16v2a2 2 0 0 0 2 2h2m8 0h2a2 2 0 0 0 2-2v-2M9 12h6m-3-3v6" />,
 };
 

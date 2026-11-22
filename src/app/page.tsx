@@ -3,6 +3,9 @@ import Link from 'next/link';
 import { projects, siteUrl } from '@/lib/data';
 import Carousel from '@/components/Carousel';
 import HomeMotion from '@/components/HomeMotion';
+import HeroSignal from '@/components/HeroSignal';
+import ScrollStudio from '@/components/ScrollStudio';
+import TechAtlas from '@/components/TechAtlas';
 import Icon from '@/components/Icon';
 import ProjectCard from '@/components/ProjectCard';
 
@@ -12,29 +15,29 @@ export default function Home() {
   return (
     <HomeMotion>
       <section className="intro" aria-labelledby="hero-title">
+        <HeroSignal />
         <div className="intro-orbit" aria-hidden="true"><i /><i /><i /></div>
         <div className="shell intro-inner">
-          <p className="intro-role"><span /> Desarrollador de software</p>
-          <h1 id="hero-title"><span>Yojhan Huanca</span><span>Yucra.</span></h1>
-          <p className="intro-summary">Desarrollo aplicaciones web y móviles, integro APIs y construyo herramientas que resuelven tareas concretas.</p>
+          <p className="intro-role"><span /> Desarrollador de software · Lima, Perú</p>
+          <h1 id="hero-title"><span>Yojhan Huanca</span><span>Yucra</span></h1>
+          <p className="intro-summary">Desarrollo aplicaciones web y móviles e integro APIs, datos e inteligencia artificial.</p>
           <div className="intro-actions">
-            <Link className="button button-primary" href="#proyectos">Explorar proyectos <Icon name="down" size={19} /></Link>
-            <Link className="button button-ghost" href="/contacto">Contacto <Icon name="up-right" size={17} /></Link>
+            <a className="button button-primary" href="#proyectos">Explorar proyectos <Icon name="down" size={19} /></a>
+            <a className="button button-ghost" href="#recorrido">Ver recorrido <Icon name="right" size={17} /></a>
           </div>
-          <p className="intro-location">Lima, Perú</p>
         </div>
       </section>
       <section className="shell work-section" id="proyectos" aria-labelledby="proyectos-title">
         <div className="section-heading">
-          <p className="section-label">Portafolio</p>
           <h2 id="proyectos-title">Proyectos destacados</h2>
-          <p>Aplicaciones de video con IA, seguridad operativa, e-commerce y cine.</p>
         </div>
         <Carousel count={projects.length}>
           {projects.map((project, i) => <ProjectCard key={project.slug} project={project} index={i} />)}
         </Carousel>
         <Link className="inline-link work-all" href="/projects">Buscar en todos los proyectos <Icon name="up-right" size={19} /></Link>
       </section>
+      <ScrollStudio />
+      <TechAtlas projects={projects} />
       <section className="profile-home">
         <div className="shell home-about">
           <p className="section-label">Experiencia</p>

@@ -8,7 +8,7 @@ export default function Carousel({ children, count }: { children: React.ReactNod
   const region = useRef<HTMLDivElement>(null);
   const drag = useRef<{ pointer: number; start: number; scroll: number; moved: boolean } | null>(null);
   const [active, setActive] = useState(0);
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState(true);
   const [visible, setVisible] = useState(false);
 
   function goTo(index: number) {
@@ -33,9 +33,16 @@ export default function Carousel({ children, count }: { children: React.ReactNod
 
   useEffect(() => {
     if (!region.current) return;
-    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: 0.35 });
+    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting && entry.intersectionRatio >= .12), { threshold: .12 });
     observer.observe(region.current);
-    return () => observer.disconnect();
+    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const syncPreference = () => { if (preference.matches) setPlaying(false); };
+    preference.addEventListener('change', syncPreference);
+    syncPreference();
+    return () => {
+      observer.disconnect();
+      preference.removeEventListener('change', syncPreference);
+    };
   }, []);
 
   useEffect(() => {
@@ -43,7 +50,7 @@ export default function Carousel({ children, count }: { children: React.ReactNod
     const timer = window.setTimeout(() => {
       if (!document.hidden) goTo((active + 1) % count);
       else setPlaying(false);
-    }, 5200);
+    }, 4400);
     return () => window.clearTimeout(timer);
   }, [playing, visible, active, count]);
 
@@ -62,7 +69,20 @@ export default function Carousel({ children, count }: { children: React.ReactNod
   }
 
   return (
-    <div className="carousel" ref={region} role="region" aria-label="Carrusel de proyectos" onFocusCapture={() => setPlaying(false)}>
+    <div className="carousel" ref={region} role="region" aria-label="Carrusel de proyectos" data-playing={playing && visible} onFocusCapture={(event) => { if (!(event.target as HTMLElement).closest('[data-playback]')) setPlaying(false); }}>
+      <div className="carousel-controls">
+        <div className="carousel-pages" aria-label="Elegir proyecto">
+          {Array.from({ length: count }, (_, index) => (
+            <button type="button" key={index} onClick={() => select(index)} aria-label={`Ver proyecto ${index + 1}`} aria-current={index === active ? 'true' : undefined}><span>{String(index + 1).padStart(2, '0')}</span></button>
+          ))}
+        </div>
+        <div className="carousel-arrows">
+          <button type="button" data-playback onClick={() => setPlaying(!playing)} aria-label={playing ? 'Pausar carrusel' : 'Reproducir carrusel'}><Icon name={playing ? 'pause' : 'play'} size={18} /></button>
+          <button type="button" onClick={() => select((active + count - 1) % count)} aria-label="Proyecto anterior"><Icon name="left" /></button>
+          <button type="button" onClick={() => select((active + 1) % count)} aria-label="Siguiente proyecto"><Icon name="right" /></button>
+        </div>
+      </div>
+      <div className="carousel-timer" key={active} aria-hidden="true"><span /></div>
       <div
         className="carousel-track" ref={track} onScroll={sync}
         onDragStart={(event) => event.preventDefault()}
@@ -88,18 +108,6 @@ export default function Carousel({ children, count }: { children: React.ReactNod
         onPointerCancel={finishDrag}
         onLostPointerCapture={finishDrag}
       >{children}</div>
-      <div className="carousel-controls">
-        <div className="carousel-pages" aria-label="Elegir proyecto">
-          {Array.from({ length: count }, (_, index) => (
-            <button type="button" key={index} onClick={() => select(index)} aria-label={`Ver proyecto ${index + 1}`} aria-current={index === active ? 'true' : undefined}><span>{String(index + 1).padStart(2, '0')}</span></button>
-          ))}
-        </div>
-        <div className="carousel-arrows">
-          <button type="button" onClick={() => setPlaying(!playing)} aria-label={playing ? 'Pausar carrusel' : 'Reproducir carrusel'}><Icon name={playing ? 'pause' : 'play'} size={18} /></button>
-          <button type="button" onClick={() => select((active + count - 1) % count)} aria-label="Proyecto anterior"><Icon name="left" /></button>
-          <button type="button" onClick={() => select((active + 1) % count)} aria-label="Siguiente proyecto"><Icon name="right" /></button>
-        </div>
-      </div>
     </div>
   );
 }

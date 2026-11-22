@@ -44,7 +44,7 @@ export const projects: Project[] = [
     image: '/art/linea-1.webp',
     imageAlt: 'Banner visual del repositorio del sistema de Línea 1',
     imageKind: 'brand',
-    technologies: ['React', 'TypeScript', 'Express', 'Prisma', 'PostgreSQL'],
+    technologies: ['React', 'TypeScript', 'Node.js', 'Express', 'Prisma', 'PostgreSQL'],
   },
   {
     slug: 'dcampo',
@@ -70,11 +70,4 @@ export const projects: Project[] = [
     technologies: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'TMDB API'],
     githubUrl: 'https://github.com/yojhanHuanca/CinnSin',
   },
-];
-
-export const skills = [
-  { label: 'Interfaces web', tools: 'JavaScript, TypeScript, React, Angular, HTML, CSS' },
-  { label: 'Backend y datos', tools: 'Node.js, Express, Laravel, Python, Django, Java, Spring Boot, PostgreSQL, MySQL, Prisma' },
-  { label: 'Móvil y multimedia', tools: 'Kotlin, Jetpack Compose, Flutter, FFmpeg, Whisper' },
-  { label: 'Herramientas', tools: 'Git, GitHub, Docker, Postman, Figma' },
 ];
